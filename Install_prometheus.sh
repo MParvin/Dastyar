@@ -10,9 +10,6 @@ fi
 useradd -m -s /bin/bash prometheus
 cd /home/prometheus
 
-https://api.github.com/repos/prometheus/prometheus/releases/latest
-
-
 downloadLink=`curl -sS https://api.github.com/repos/prometheus/prometheus/releases/latest |     grep -i \`uname -s\` | grep 'amd64' | grep download_url | cut -d'"' -f4`
 
 wget $downloadLink -O /tmp/prometheus.tar.gz
