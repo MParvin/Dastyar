@@ -1,8 +1,14 @@
 #!/bin/bash
 
+if [ "$UID" -ne 0 ]
+then
+echo "Please run this script with sudo"
+exit 1
+fi
+
+
 useradd -m -s /bin/bash prometheus
 cd /home/prometheus
-
 
 https://api.github.com/repos/prometheus/prometheus/releases/latest
 
