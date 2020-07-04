@@ -3,6 +3,7 @@
 echo '
 [1] - Install node exporter
 [2] - Install node exporter
+[3] - Install docker
 '
 read -p "Enter a number " selectedNumber
 
@@ -13,6 +14,10 @@ case "$1" in
         
         2)
             ./Install_prometheus.sh
+            ;;
+        
+        3)
+            ./Install_docker.sh
             ;;
         
         *)
