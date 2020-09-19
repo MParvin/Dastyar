@@ -11,7 +11,7 @@ rm -f /tmp/node_exporter.tar.gz
 # uname -i -> x86_64
 # uname -i  | cut -d'_' -f2  -> 64
 
-netstat -nltp | grep :9100 && (clear && echo "Node exporter already installed" && exit 0)
+netstat -nltp | grep :9100 && echo "Node exporter already installed" && exit 2
 
 downloadLink=`curl -sS https://api.github.com/repos/prometheus/node_exporter/releases/latest |     grep -i \`uname -s\` | grep 'amd64' | grep download_url | cut -d'"' -f4`
 
