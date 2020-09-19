@@ -6,6 +6,8 @@ echo "Please run this script with sudo"
 exit 1
 fi
 
+which netstat || (echo "Need to install netstat for check ports" && exit 1) # TODO: create a script for install all dependencies on server like netstat, vim
+
 rm -f /tmp/node_exporter.tar.gz
 # uname -s -> Linux
 # uname -i -> x86_64
