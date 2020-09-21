@@ -46,4 +46,4 @@ WantedBy=default.target' > /etc/systemd/system/node_exporter.service
 systemctl daemon-reload
 systemctl enable --now node_exporter
 
-(netstat -nltp | grep :9100 && (clear && echo "Everything is OK")) || (clear && echo "There is some problems, please read this log" && journalctl -u node_exporter)
+(netstat -nltp | grep :9100 && echo "Everything is OK") || (echo "There is some problems, please read this log" && journalctl -u node_exporter)
