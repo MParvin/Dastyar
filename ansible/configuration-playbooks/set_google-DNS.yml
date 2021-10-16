@@ -1,0 +1,17 @@
+---
+- name: Change DNS to Shecan
+  hosts: "{{ host_name | default('all') }}"
+  become: true
+
+  tasks:
+    - name: Ensure resolv.conf is mutable
+      file:
+        path: /etc/resolv.conf
+        attr: -i
+
+    - name: Create resolv.conf
+      copy:
+        dest: /etc/resolv.conf
+        content: |
+          nameserver 8.8.8.8
+          nameserver 8.8.4.4

@@ -1,10 +1,6 @@
 #!/bin/bash
 
-if [ "$UID" -ne 0 ]
-then
-echo "Please run this script with sudo"
-exit 1
-fi
+source "$( dirname -- "${BASH_SOURCE[0]}" )"/is_root.sh
 
 which docker-compose && (echo "docker-compose already installed" && exit 1)
 

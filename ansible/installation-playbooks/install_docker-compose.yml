@@ -1,0 +1,16 @@
+---
+- name: Install docker-compose
+  hosts: "{{ host_name | default('all') }}"
+
+  tasks:
+    - name: get latest version URL
+      shell: curl -sS https://api.github.com/repos/docker/compose/releases/latest | grep -i Linux | grep {{ ansible_architecture }} | grep download_url | cut -d'"' -f4 | head -1
+      register: docker_compose_url
+    - debug: var=docker_compose_url
+
+    - name: Download docker-compose
+      get_url:
+        url: "{{ docker_compose_url.stdout }}"
+        dest: /usr/local/bin/docker-compose
+        mode: 0755
+      debugger: on_failed
