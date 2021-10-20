@@ -1,0 +1,56 @@
+---
+- name: Install galera cluster
+  hosts: "{{ host_name | default('none') }}"
+
+  tasks:
+
+    # Get galera latest version
+    - name: get galera latest version
+      shell: curl -sSL http://releases.galeracluster.com/ | grep 'galera-' | tail -1 | cut -d'>' -f2 | cut -d'/' -f1
+      register: galera_version
+
+    # Get wsrep version
+    - name: get wsrep version
+      shell: curl -sSL http://releases.galeracluster.com/ | grep mysql-wsrep | tail -1 | cut -d'>' -f2 | cut -d'/' -f1
+      register: wsrep_version
+
+    # Add repositories for redhat based (7)
+    - name: Install dependencies on rhell base
+      when: ansible_distribution == "RedHat"
+      template:
+        src: template/yum_galera.j2
+        dest: /etc/yum.repos.d/galera.repo
+
+    # Todo:
+    # Install dependencies for debian based
+    - name: Install dependencies on debian base
+      shell: echo 'todo'
+
+    
+
+    # Install Galera on Redhat base (If playbook_action is bootstrap)
+    - name: Install galera on redhat
+      yum:
+        name: 
+          - "{{ galera_version }} "
+          - " {{ wsrep_version }} "
+          - rsync 
+          - lsof 
+          - policycoreutils-python
+          - firewalld
+
+
+
+    # Install Galera on Debian base (If playbook_action is bootstrap)
+
+
+
+    # Change config file (If playbook_action is bootstrap)
+  
+
+
+    # Start bootstrap (If playbook_action is bootstrap)
+
+    # Add new node(s) if action is add_node
+
+      
