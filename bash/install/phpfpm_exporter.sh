@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source "$( dirname -- "${BASH_SOURCE[0]}" )"/is_root.sh
-
 which netstat || (echo "Need to install netstat for check ports" && exit 1) # TODO: create a script for install all dependencies on server like netstat, vim
 
 rm -f /tmp/phpfpm_exporter.tar.gz

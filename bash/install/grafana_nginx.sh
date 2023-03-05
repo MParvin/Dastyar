@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source "$( dirname -- "${BASH_SOURCE[0]}" )"/is_root.sh
-
 apt update -y && apt install -y nginx jq
 
 grafanaVersion=`curl -sS https://api.github.com/repos/grafana/grafana/releases/latest | jq .tag_name`

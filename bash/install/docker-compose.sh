@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source "$( dirname -- "${BASH_SOURCE[0]}" )"/is_root.sh
-
 which docker-compose && (echo "docker-compose already installed" && exit 1)
 
 downloadLink=`curl -sS https://api.github.com/repos/docker/compose/releases/latest | grep -i \`uname -s\` | grep \`uname -i\` | grep download_url | cut -d'"' -f4 | head -1`

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source "$( dirname -- "${BASH_SOURCE[0]}" )"/is_root.sh
-
 useradd -m -s /bin/bash prometheus
 cd /home/prometheus
 
