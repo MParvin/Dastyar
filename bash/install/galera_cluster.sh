@@ -2,7 +2,8 @@
 
 galera_hosts_file=./.galera_servers
 # Check ansible is installed
-which ansible-playbook  || ( echo "You need ansible installed" && exit 1 )
+which ansible-playbook  || ( echo "Ansible is not installed, please install it first" && exit 1 )
+
 # Check for galera data
 [ -s ./galera_servers.list ] || \
 echo -e '* read more about bootstraping here\n* https://mariadb.com/kb/en/getting-started-with-mariadb-galera-cluster/#bootstrapping-a-new-cluster'
