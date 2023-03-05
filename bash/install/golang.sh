@@ -3,8 +3,6 @@
 # Get currnet shell name
 shell_name=`echo $SHELL | awk -F '/' '{print $NF}'`
 shell_rc=".$shell_name"rc
-echo $shell_name
-exit
 
 name_version=`curl -sSL 'https://golang.org/VERSION?m=text'`
 
