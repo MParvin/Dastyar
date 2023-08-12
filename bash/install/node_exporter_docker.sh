@@ -30,5 +30,5 @@ services:
 
 docker-compose up -d
 
-# Check gitlab runner is running
-curl -s http://localhost:9100/metrics | grep gitlab_runner || ( echo "Gitlab runner is not running, please check it" && exit 1 )
+# Check node exporter is running
+curl -s http://localhost:9100/metrics || ( echo "Node exporter is not running, please check it" && exit 1 )
