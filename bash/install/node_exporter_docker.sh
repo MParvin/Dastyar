@@ -1,26 +1,30 @@
 #!/bin/bash
 
-# This is a script to install gitlab runner on docker
-# Path: bash/install/gitlab_runner_docker.sh
+# This is a script to install node exporter on docker
 
 # Check docker is installed
 which docker || ( echo "Docker is not installed, please install it first" && exit 1 )
-
-mkdir -p /opt/src/gitlab-runner
-cd /opt/src/gitlab-runner
+deploy_path="/opt/src/node_exporter"
+mkdir -p $deploy_path
+cd $deploy_path
 
 echo '
 version: "3.7"
 services:
-  gitlab-runner:
-    image: gitlab/gitlab-runner:latest
-    container_name: gitlab-runner
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
     restart: always
     privileged: true
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /srv/gitlab-runner/config:/etc/gitlab-runner
-      - /opt/src/gitlab-runner:/home/gitlab-runner
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.rootfs=/rootfs"
+      - "--path.sysfs=/host/sys"
+      - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
     ports:
         - 9100:9100
 ' > docker-compose.yml
