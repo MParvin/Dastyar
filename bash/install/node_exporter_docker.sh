@@ -6,9 +6,6 @@
 # Check docker is installed
 which docker || ( echo "Docker is not installed, please install it first" && exit 1 )
 
-# Check docker-compose is installed
-which docker-compose || ( echo "Docker-compose is not installed, please install it first" && exit 1 )
-
 mkdir -p /opt/src/gitlab-runner
 cd /opt/src/gitlab-runner
 
@@ -28,7 +25,8 @@ services:
         - 9100:9100
 ' > docker-compose.yml
 
-docker-compose up -d
+# Check docker-compose is installed
+(which docker-compose && docker-compose up -d ) || ( docker compose version && docker compose up -d ) || ( echo "Docker-compose is not installed, please install it first" && exit 1 )
 
 # Check node exporter is running
 curl -s http://localhost:9100/metrics || ( echo "Node exporter is not running, please check it" && exit 1 )
