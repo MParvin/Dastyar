@@ -1,7 +1,0 @@
----
-- name: Install galera cluster
-  hosts: "{{ host_name | default('none') }}"
-
-  tasks:
-    - name: Install bootstrap node
-      
